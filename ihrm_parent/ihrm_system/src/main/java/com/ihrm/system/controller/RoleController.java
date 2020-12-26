@@ -64,7 +64,7 @@ public class RoleController extends BaseController{
     public Result findById(@PathVariable(name = "id") String id) throws Exception {
         Role role = roleService.findById(id);
         RoleResult roleResult = new RoleResult(role);
-        return new Result(ResultCode.SUCCESS,roleResult);
+        return new Result(ResultCode.SUCCESS, roleResult);
     }
 
     /**
@@ -73,7 +73,7 @@ public class RoleController extends BaseController{
     @RequestMapping(value = "/role", method = RequestMethod.GET)
     public Result findByPage(int page,int pagesize,Role role) throws Exception {
         Page<Role> searchPage = roleService.findByPage(companyId, page, pagesize);
-        PageResult<Role> pr = new PageResult(searchPage.getTotalElements(),searchPage.getContent());
+        PageResult<Role> pr = new PageResult(searchPage.getTotalElements(), searchPage.getContent());
         return new Result(ResultCode.SUCCESS,pr);
     }
 

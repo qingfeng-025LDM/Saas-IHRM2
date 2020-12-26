@@ -5,6 +5,7 @@ import com.ihrm.common.entity.PageResult;
 import com.ihrm.common.entity.Result;
 import com.ihrm.common.entity.ResultCode;
 import com.ihrm.domain.system.User;
+import com.ihrm.domain.system.response.UserResult;
 import com.ihrm.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -56,7 +57,8 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     public Result findById(@PathVariable(value = "id") String id) {
         User user = userService.findById(id);
-        return new Result(ResultCode.SUCCESS, user);
+        UserResult userResult = new UserResult(user);
+        return new Result(ResultCode.SUCCESS, userResult);
     }
 
     /**

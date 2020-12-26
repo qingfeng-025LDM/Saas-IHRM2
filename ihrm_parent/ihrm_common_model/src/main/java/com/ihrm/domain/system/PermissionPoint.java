@@ -16,8 +16,6 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "pe_permission_point")
-@Getter
-@Setter
 public class PermissionPoint implements Serializable {
     private static final long serialVersionUID = -1002411490113957485L;
 
@@ -36,4 +34,35 @@ public class PermissionPoint implements Serializable {
 
     private String pointStatus;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getPointClass() {
+        return pointClass;
+    }
+
+    public void setPointClass(String pointClass) {
+        this.pointClass = pointClass;
+    }
+
+    public String getPointIcon() {
+        return pointIcon;
+    }
+
+    public void setPointIcon(String pointIcon) {
+        this.pointIcon = pointIcon;
+    }
+
+    public String getPointStatus() {
+        return pointStatus;
+    }
+
+    public void setPointStatus(String pointStatus) {
+        this.pointStatus = pointStatus;
+    }
 }

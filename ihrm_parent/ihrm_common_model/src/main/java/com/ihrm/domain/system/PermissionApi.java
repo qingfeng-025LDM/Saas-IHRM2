@@ -12,8 +12,6 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "pe_permission_api")
-@Getter
-@Setter
 public class PermissionApi implements Serializable {
     private static final long serialVersionUID = -1803315043290784820L;
     /**
@@ -33,4 +31,36 @@ public class PermissionApi implements Serializable {
      * 权限等级，1为通用接口权限，2为需校验接口权限
      */
     private String apiLevel;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getApiUrl() {
+        return apiUrl;
+    }
+
+    public void setApiUrl(String apiUrl) {
+        this.apiUrl = apiUrl;
+    }
+
+    public String getApiMethod() {
+        return apiMethod;
+    }
+
+    public void setApiMethod(String apiMethod) {
+        this.apiMethod = apiMethod;
+    }
+
+    public String getApiLevel() {
+        return apiLevel;
+    }
+
+    public void setApiLevel(String apiLevel) {
+        this.apiLevel = apiLevel;
+    }
 }
