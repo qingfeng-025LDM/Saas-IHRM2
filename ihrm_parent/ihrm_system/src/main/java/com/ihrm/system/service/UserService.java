@@ -96,4 +96,8 @@ public class UserService{
     public void deleteById(String id) {
         userDao.deleteById(id);
     }
+
+    public User findByMobile(String mobile) {
+        return userDao.findByMobile(mobile);
+    }
 }

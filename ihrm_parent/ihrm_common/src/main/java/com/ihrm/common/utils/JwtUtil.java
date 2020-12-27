@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.Date;
 import java.util.Map;
 
-@ConfigurationProperties("jwt.privateKey")
+@ConfigurationProperties("jwt.config")
 public class JwtUtil {
 
     //签名私钥

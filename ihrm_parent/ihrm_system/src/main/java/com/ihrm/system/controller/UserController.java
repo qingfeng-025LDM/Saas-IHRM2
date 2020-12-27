@@ -4,6 +4,7 @@ import com.ihrm.common.controller.BaseController;
 import com.ihrm.common.entity.PageResult;
 import com.ihrm.common.entity.Result;
 import com.ihrm.common.entity.ResultCode;
+import com.ihrm.common.utils.JwtUtil;
 import com.ihrm.domain.system.User;
 import com.ihrm.domain.system.response.UserResult;
 import com.ihrm.system.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 //1.解决跨域
@@ -21,6 +23,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     /**
      * 保存
@@ -80,5 +85,27 @@ public class UserController extends BaseController {
     public Result delete(@PathVariable(value = "id") String id) {
         userService.deleteById(id);
         return new Result(ResultCode.SUCCESS);
+    }
+
+    /**
+     * 登录
+     * @param loginMap
+     * @return
+     */
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public Result login(@RequestBody Map<String, String> loginMap){
+        String mobile = loginMap.get("mobile");
+        String password = loginMap.get("password");
+        User user = userService.findByMobile(mobile);
+        if (user == null || !user.getPassword().equals(password)){  //登录失败
+            return new Result(ResultCode.MOBILEORPASSWORDERROR);
+        }else {
+            //登录成功
+            Map<String, Object> map = new HashMap<>();
+            map.put("companyId", user.getCompanyId());
+            map.put("companyName", user.getCompanyName());
+            String token = jwtUtil.createJwt(mobile, password, map);
+            return new Result(ResultCode.SUCCESS, token);
+        }
     }
 }
